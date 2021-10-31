@@ -10,6 +10,9 @@ class List(models.Model):
     code = CharField(max_length=8)
     creation_date = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self) -> str:
+        return "List " + self.code
+
 
 class ListItem(models.Model):
     list_id = models.ForeignKey(List, on_delete=CASCADE)
@@ -34,3 +37,6 @@ class ListItem(models.Model):
         choices=MeasureUnit.choices, default=MeasureUnit.UNIT, max_length=2
     )
     fiscal_note = models.ImageField()
+
+    def __str__(self) -> str:
+        return "From " + str(self.list_id) + " - " + self.name
