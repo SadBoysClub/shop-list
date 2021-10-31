@@ -1,7 +1,8 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-from django.contrib.auth.models import User
+from django.contrib.auth.models import GroupManager, User
 from django.db.models.fields import CharField
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 class List(models.Model):
@@ -18,4 +19,12 @@ class ListItem(models.Model):
     buy_date = models.DateField(blank=True, null=True)
     bought_by = models.ForeignKey(User)
     details = models.CharField(max_length=300)
+    quantity = models.IntegerField()
+
+    class MeasureUnit(models.TextChoices):
+        GRAM = "g", _("gram")
+        MILLILITER = "ml", _("milliliter")
+        UNIT = "u", _("unit")
+
+    quantity_measure = models.CharField(choices=MeasureUnit, default=MeasureUnit.UNIT)
     fiscal_note = models.ImageField()
