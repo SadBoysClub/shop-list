@@ -30,6 +30,7 @@ class ListItem(models.Model):
         MILLILITER = "ml", _("milliliter")
         UNIT = "u", _("unit")
 
+
     quantity_measure = models.CharField(
         choices=MeasureUnit.choices, default=MeasureUnit.UNIT, max_length=2
     )
