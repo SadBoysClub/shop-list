@@ -20,7 +20,7 @@ class ListItem(models.Model):
     )
     buy_date = models.DateField(blank=True, null=True)
     bought_by = models.ForeignKey(
-        User, on_delete=SET_NULL, null=True, related_name="bought_by"
+        User, on_delete=SET_NULL, null=True, blank=True, related_name="bought_by"
     )
     details = models.CharField(max_length=300)
     quantity = models.IntegerField()
@@ -29,7 +29,6 @@ class ListItem(models.Model):
         GRAM = "g", _("gram")
         MILLILITER = "ml", _("milliliter")
         UNIT = "u", _("unit")
-
 
     quantity_measure = models.CharField(
         choices=MeasureUnit.choices, default=MeasureUnit.UNIT, max_length=2
