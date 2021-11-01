@@ -1,13 +1,14 @@
 from django.db import models
 from django.db.models.deletion import CASCADE, SET_NULL
 from django.contrib.auth.models import GroupManager, User
-from django.db.models.fields import CharField
+from django.db.models.fields import CharField, UUIDField
 from django.utils.translation import gettext_lazy as _
+import uuid
 
 # Create your models here.
 class List(models.Model):
     owner = models.ForeignKey(User, on_delete=CASCADE)
-    code = CharField(max_length=8)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     creation_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
